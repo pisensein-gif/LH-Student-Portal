@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Attendance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Hostel Admin</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='admin.html'">Back to Dashboard</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Daily Attendance</h2>
+            <p>Mark attendance for <strong id="attendance-date-display"></strong>. Students on Mess Out are highlighted in red.</p>
+            
+            <input type="text" id="search-attendance-lhid" placeholder="Search by LH ID..." onkeyup="filterTableByLHID('search-attendance-lhid', 'admin-attendance-body', 1)" class="search-input" style="margin-top: 16px;">
+            
+            <div class="table-container">
+                <table id="attendance-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>LH ID</th>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Tea</th>
+                            <th>Dinner</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-attendance-body">
+                        <!-- Attendance rows will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'admin') {
+            window.location.href = 'index.html';
+        }
+        renderAttendanceTable();
+    </script>
+</body>
+</html>

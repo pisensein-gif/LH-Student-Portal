@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Hostel Admin</div>
+        <button class="btn-secondary" onclick="logout()">Logout</button>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card welcome-card">
+            <h2>Welcome, Admin!</h2>
+            <p>Select a module to manage the hostel.</p>
+        </div>
+
+        <div class="card action-card" id="card-students" onclick="window.location.href='admin_students.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Manage Students</h2>
+            <p>Register new student accounts and view all registered students in the hostel.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View</button>
+        </div>
+
+        <div class="card action-card" id="card-messout" onclick="window.location.href='admin_messout.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Mess Out Records</h2>
+            <p>View all the mess out applications submitted by students.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View</button>
+        </div>
+
+        <div class="card action-card" id="card-extras" onclick="window.location.href='admin_extras.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Manage Extras</h2>
+            <p>Create new extra items for the store and track the extras taken by students.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View</button>
+        </div>
+
+        <div class="card action-card" id="card-attendance" onclick="window.location.href='admin_attendance.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Manage Attendance</h2>
+            <p>Mark daily attendance for Breakfast, Lunch, Tea, and Dinner.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View</button>
+        </div>
+
+        <div class="card action-card" id="card-reports" onclick="window.location.href='admin_reports.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
+            <h2>Attendance Reports</h2>
+            <p>Generate and download monthly attendance reports (CSV) based on mess out records.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View</button>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'admin') {
+            window.location.href = 'index.html';
+        } else {
+            const role = localStorage.getItem('adminRole');
+            if (role === 'attendance') {
+                document.getElementById('card-students').style.display = 'none';
+                document.getElementById('card-messout').style.display = 'none';
+                document.getElementById('card-extras').style.display = 'none';
+                document.getElementById('card-reports').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

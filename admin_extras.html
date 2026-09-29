@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Extras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Hostel Admin</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='admin.html'">Back to Dashboard</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Add Extra Item</h2>
+            <p>Create a new extra item available for students.</p>
+            <form id="create-extra-form" onsubmit="handleAddExtraItem(event)">
+                <div class="input-group">
+                    <label for="extra-name">Item Name</label>
+                    <input type="text" id="extra-name" placeholder="e.g., Milk" required>
+                </div>
+                <div class="input-group">
+                    <label for="extra-category">Category</label>
+                    <input type="text" id="extra-category" placeholder="e.g., Food" required>
+                </div>
+                <div class="input-group">
+                    <label for="extra-rate">Rate (₹)</label>
+                    <input type="number" id="extra-rate" placeholder="e.g., 20" required>
+                </div>
+                <button type="submit" class="btn-primary">Add Item</button>
+                <div id="add-extra-message" class="message"></div>
+            </form>
+            
+            <h3 style="margin-top: 24px; font-size: 16px;">Available Items</h3>
+            <div class="table-container" style="margin-top: 12px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Rate</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-available-extras-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Student Extras Summary</h2>
+            <p>Total count of extras taken by each student.</p>
+            <input type="text" id="search-extras-lhid" placeholder="Search by LH ID..." onkeyup="filterTableByLHID('search-extras-lhid', 'admin-student-extras-body', 1)" class="search-input">
+            <div class="table-container">
+                <table id="admin-student-extras-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>LH ID</th>
+                            <th>Total Extras Taken</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-student-extras-body">
+                        <!-- Student extra counts will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'admin') {
+            window.location.href = 'index.html';
+        }
+        renderAdminExtras();
+    </script>
+</body>
+</html>

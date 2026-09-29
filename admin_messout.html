@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mess Out Records</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Hostel Admin</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='admin.html'">Back to Dashboard</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Mess Out Records</h2>
+            <p>List of students who have applied for mess out.</p>
+            <input type="text" id="search-messout-lhid" placeholder="Search by LH ID..." onkeyup="filterTableByLHID('search-messout-lhid', 'admin-messouts-body', 1)" class="search-input">
+            <div class="table-container">
+                <table id="messouts-table">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>LH ID</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-messouts-body">
+                        <!-- Mess out rows will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'admin') {
+            window.location.href = 'index.html';
+        }
+        renderAdminMessOuts();
+    </script>
+</body>
+</html>

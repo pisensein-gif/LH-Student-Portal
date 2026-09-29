@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="center-content">
+    <div class="login-container">
+        <div class="brand">
+            <h1>LH Hostel</h1>
+            <p>Welcome back. Please login to your account.</p>
+        </div>
+        
+        <div class="login-tabs">
+            <button id="tab-student" class="tab active" onclick="switchLoginTab('student')">Student</button>
+            <button id="tab-admin" class="tab" onclick="switchLoginTab('admin')">Admin</button>
+        </div>
+
+        <div class="form-container">
+            <!-- Student Login Form -->
+            <form id="student-login-form" onsubmit="handleStudentLogin(event)">
+                <div class="input-group">
+                    <label for="student-lh-id">LH ID</label>
+                    <input type="text" id="student-lh-id" placeholder="Enter your LH ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="student-password">Password</label>
+                    <input type="password" id="student-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login as Student</button>
+            </form>
+
+            <!-- Admin Login Form -->
+            <form id="admin-login-form" class="hidden" onsubmit="handleAdminLogin(event)">
+                <div class="input-group">
+                    <label for="admin-id">Admin ID</label>
+                    <input type="text" id="admin-id" placeholder="Enter Admin ID" required>
+                </div>
+                <div class="input-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login as Admin</button>
+            </form>
+            
+            <div id="login-error" class="error-message"></div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

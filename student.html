@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Student Portal</div>
+        <button class="btn-secondary" onclick="logout()">Logout</button>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card welcome-card">
+            <h2>Welcome, <span id="student-name-display">Student</span>!</h2>
+            <p>LH ID: <span id="student-lhid-display">---</span></p>
+            <p>This is your student portal.</p>
+        </div>
+
+        <div class="card action-card" onclick="window.location.href='messout.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Apply Mess Out</h2>
+            <p>Select your dates and apply for mess reduction. Maximum 5 days per application. 2 days advance notice required.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">Apply Now</button>
+        </div>
+
+        <div class="card action-card" onclick="window.location.href='extras.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 20px;">
+            <h2>Extras</h2>
+            <p>Browse available extra items (food, supplies, etc.) and add them to your account.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View Extras</button>
+        </div>
+
+        <div class="card action-card" onclick="window.location.href='student_profile.html'" style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
+            <h2>My Profile</h2>
+            <p>View your account details and update your password.</p>
+            <button class="btn-primary" style="margin-top: 10px; width: auto;">View Profile</button>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Check if student is logged in
+        if (localStorage.getItem('loggedInUserType') !== 'student') {
+            window.location.href = 'index.html';
+        } else {
+            const currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+            if(currentStudent) {
+                document.getElementById('student-name-display').textContent = currentStudent.name;
+                document.getElementById('student-lhid-display').textContent = currentStudent.lhId;
+            }
+        }
+    </script>
+</body>
+</html>

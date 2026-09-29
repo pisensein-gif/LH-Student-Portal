@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Students</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Hostel Admin</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='admin.html'">Back to Dashboard</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Create Student Account</h2>
+            <p>Register a new student into the hostel system.</p>
+            
+            <form id="create-student-form" onsubmit="handleCreateStudent(event)">
+                <div class="input-group">
+                    <label for="new-student-name">Student Name</label>
+                    <input type="text" id="new-student-name" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-student-lh-id">LH ID</label>
+                    <input type="text" id="new-student-lh-id" placeholder="e.g. LH101" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-student-password">Password</label>
+                    <input type="password" id="new-student-password" placeholder="Create a password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+                <div id="create-student-message" class="message"></div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Registered Students</h2>
+            <input type="text" id="search-student-lhid" placeholder="Search by LH ID..." onkeyup="filterTableByLHID('search-student-lhid', 'students-table-body', 1)" class="search-input">
+            <div class="table-container">
+                <table id="students-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>LH ID</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-table-body">
+                        <!-- Student rows will be generated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'admin') {
+            window.location.href = 'index.html';
+        }
+        renderStudentsTable();
+    </script>
+</body>
+</html>

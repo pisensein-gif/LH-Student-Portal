@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student - Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Student Portal</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='student.html'">Back to Portal</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>My Profile</h2>
+            <div style="margin-bottom: 24px; color: var(--text-primary); font-size: 15px; line-height: 2;">
+                <p><strong>Name:</strong> <span id="profile-name"></span></p>
+                <p><strong>LH ID:</strong> <span id="profile-lhid"></span></p>
+                <p><strong>Current Password:</strong> <span id="profile-password" style="background: #e2e8f0; padding: 4px 8px; border-radius: 6px; font-family: monospace; letter-spacing: 1px;"></span></p>
+            </div>
+
+            <h3 style="margin-bottom: 12px; font-size: 18px;">Change Password</h3>
+            <form id="change-password-form" onsubmit="handleChangePassword(event)">
+                <div class="input-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" id="confirm-password" required>
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">Update Password</button>
+                <div id="password-message" class="message"></div>
+            </form>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'student') {
+            window.location.href = 'index.html';
+        } else {
+            renderStudentProfile();
+        }
+    </script>
+</body>
+</html>

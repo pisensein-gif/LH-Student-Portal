@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Extras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Student Portal</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='student.html'">Back to Portal</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Available Extras</h2>
+            <p>Select an item to add to your account.</p>
+            <div id="extras-message" class="message"></div>
+            
+            <div class="table-container" style="margin-top: 15px; margin-bottom: 30px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Rate</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-available-extras-body">
+                        <!-- Available extras -->
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>My Taken Extras</h3>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 10px;">Note: The delete option is available only for 1 hour after taking an extra.</p>
+            <div class="table-container" style="margin-top: 15px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Rate</th>
+                            <th>Date Taken</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-taken-extras-body">
+                        <!-- Taken extras -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if (localStorage.getItem('loggedInUserType') !== 'student') {
+            window.location.href = 'index.html';
+        } else {
+            renderStudentExtrasPage();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management - Apply Mess Out</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-brand">LH Student Portal</div>
+        <div>
+            <button class="btn-secondary" onclick="window.location.href='student.html'">Back to Portal</button>
+            <button class="btn-secondary" onclick="logout()">Logout</button>
+        </div>
+    </header>
+    
+    <main class="portal-content">
+        <div class="card">
+            <h2>Apply Mess Out</h2>
+            <p>Please select your mess out dates. </p>
+            <ul style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; padding-left: 20px;">
+                <li>You must apply at least 2 days in advance.</li>
+                <li>Maximum 5 days can be taken at a time.</li>
+                <li>You cannot apply for a new mess out until your current mess out period has passed.</li>
+            </ul>
+            
+            <form id="messout-form" onsubmit="handleApplyMessOut(event)">
+                <div class="input-group">
+                    <label for="messout-from">From Date</label>
+                    <input type="date" id="messout-from" required>
+                </div>
+                <div class="input-group">
+                    <label for="messout-to">To Date</label>
+                    <input type="date" id="messout-to" required>
+                </div>
+                <button type="submit" class="btn-primary" id="apply-messout-btn">Submit Mess Out</button>
+                <div id="messout-message" class="message"></div>
+            </form>
+
+            <div style="margin-top: 30px;">
+                <h3>Your Active/Future Mess Outs</h3>
+                <div class="table-container" style="margin-top: 15px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-messout-body">
+                            <!-- Student's mess outs will appear here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+    <script>
+        // Check if student is logged in
+        if (localStorage.getItem('loggedInUserType') !== 'student') {
+            window.location.href = 'index.html';
+        } else {
+            initializeMessOutPage();
+        }
+    </script>
+</body>
+</html>
